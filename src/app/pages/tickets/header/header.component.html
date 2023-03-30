@@ -1,0 +1,17 @@
+<div class="d-flex position-relative">
+  <div class="flex-grow-1">
+    <p-menubar [model]="items"></p-menubar>
+  </div>
+
+
+
+  <div class="right-block">
+    <div class="user-block">
+      <app-user-logo></app-user-logo>
+    </div>
+    <div class="time-block">
+      <div>{{time | date: 'HH:mm:ss'}}</div>
+      <p class="timer-day p-0 m-0">{{time | date: 'EEEE'}}</p>
+    </div>
+  </div>
+</div>

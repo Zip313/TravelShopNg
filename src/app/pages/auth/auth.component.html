@@ -1,12 +1,17 @@
-<div class="d-flex">
-  <p-tabView>
-    <p-tabPanel header="Авторизация">
-      <app-authorization></app-authorization>
+<div class="d-flex w-100">
+  <p-tabView class="w-100">
+    <p-tabPanel header="Авторизация" >
+      <ng-template pTemplate="content" >
+        <app-authorization></app-authorization>
+      </ng-template>
     </p-tabPanel>
     <p-tabPanel header="Регистрация">
-
+      <app-registration></app-registration>
     </p-tabPanel>
 
   </p-tabView>
 
 </div>
+<p-toast position="top-right"></p-toast>
+
+

@@ -1,3 +1,77 @@
-<input type="text"
-       pInputText
-       [(ngModel)]="property"/>
+<div *ngIf="!userService.getUser()"
+  class="d-flex flex-column col-8 m-auto authorization-input-wrap">
+  <div >
+    <span class="mx-3">{{loginText}}</span>
+    <input type="text"
+           class="pi-phone"
+           pInputText
+           autocomplete="login"
+           [ngClass]="{'input-error': !login}"
+           [(ngModel)]="login"/>
+  </div>
+  <div>
+    <span class="mx-3">{{pswText}}</span>
+    <input class="mt-3 "
+           type="password"
+           pInputText
+           autocomplete="password"
+           [ngClass]="{'input-error': !psw}"
+           [(ngModel)]="psw"/>
+  </div>
+  <div class="mt-3">
+<!--    <p-checkbox name="groupname" value="val1" [(ngModel)]="selectedValues"></p-checkbox>-->
+    <p-checkbox (onChange)="vipStatusSelected($event)"
+                label="Есть номер карты"
+                [(ngModel)]="selectedValue"
+                [binary]="true" >
+      CheckBox
+    </p-checkbox>
+    <p-checkbox class="mx-4"
+                label="Запомнить меня"
+                [(ngModel)]="isRememberMe"
+                [binary]="true" >
+    </p-checkbox>
+    <div *ngIf="selectedValue">
+      <span class="mx-3">Номер карты</span>
+      <input class="mt-3 "
+             type="text"
+             pInputText
+             [(ngModel)]="cardNumber"/>
+    </div>
+  </div>
+  <div class="mt-5 d-flex justify-content-center">
+    <button class="btn btn-primary"
+            (click)="onAuth($event)"
+            type="button">
+      {{authTextButton}}
+    </button>
+  </div>
+
+
+
+</div>
+
+<div *ngIf="this.userService.getUser()">
+  <div>
+    <span>{{userService.getUser()?.login}}</span>
+  </div>
+  <div>
+    <a routerLink="/tickets/tickets-list"
+       routerLinkActive="active"
+
+    >
+      Tickets
+    </a>
+  </div>
+  <button class="btn btn-success"
+          (click)="logout()"
+  >
+    Logout
+  </button>
+</div>
+
+<div>
+  <div>!!!</div>
+  <div *ngFor="let user of authService.usersStorage">{{user.login}}</div>
+  <div>{{this.authService.usersStorage}}</div>
+</div>

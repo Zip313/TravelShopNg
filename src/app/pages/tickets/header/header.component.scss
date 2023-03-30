@@ -1,0 +1,25 @@
+:host{
+  height: 60px;
+  width: 100%;
+  display: block;
+
+
+}
+.right-block{
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.time-block{
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.user-block{
+  margin: auto;
+  //height: 100%;
+  vertical-align: center;
+}
