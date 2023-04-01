@@ -26,11 +26,10 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges{
 
   private items:HTMLElement[];
   private index: number = 0;
-  public activeElementIndex: number;
-  constructor(private el:ElementRef) { }
+  public activeElementIndex: number = 0;
+  constructor(private el:ElementRef) {}
 
   ngAfterViewInit(): void {
-    this.initItems();
     setTimeout(()=>{
       this.renderComplete.emit(true);
     },500)
@@ -83,14 +82,11 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges{
     if(this.selector){
       this.items = this.el.nativeElement.querySelectorAll(this.selector);
       if(this.initFirst){
-        console.log('1',this.el.nativeElement.querySelectorAll('*'),this.el.nativeElement.querySelectorAll('.ticket-item'))
         if(this.items[0]){
-          console.log(this.items[0]);
           this.setAttrStyleBorder(0);
         }
       }
     }
-    console.log(this.items);
   }
 }
 

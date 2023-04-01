@@ -18,7 +18,6 @@ export class AuthService {
 
   checkUser(user:IUser):IUser|null{
     const isUserExist = this.usersStorage.find(x=>x.login==user.login);
-    console.log(isUserExist,user,this.usersStorage)
     if (isUserExist && isUserExist.psw === user.psw){
       return isUserExist;
     }

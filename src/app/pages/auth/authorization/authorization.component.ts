@@ -67,7 +67,6 @@ export class AuthorizationComponent implements OnInit,OnDestroy {
         summary: `Имя пользователя или пароль не совпадают`,
       });
     };
-    console.log(event)
   }
 
   checkAuth(){

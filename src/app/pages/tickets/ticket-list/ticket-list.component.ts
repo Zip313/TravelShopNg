@@ -12,7 +12,7 @@ import {BlocksStyleDirective} from "../../../directive/blocks-style.directive";
 })
 export class TicketListComponent implements OnInit, AfterViewInit {
   tickets:ITour[]=[];
-  @ViewChild('tourWrap',{read: BlocksStyleDirective}) blockDirective:BlocksStyleDirective;
+  @ViewChild('blockDirective',{read: BlocksStyleDirective}) blockDirective:BlocksStyleDirective;
   @ViewChild('tourWrap') tourWrap:ElementRef;
 
   ticketsFiltered:ITour[]=[];
@@ -22,11 +22,9 @@ export class TicketListComponent implements OnInit, AfterViewInit {
 
   constructor(private ticketsService:TicketsService,
               private ticketsStorage:TicketsStorageService,
-              private router:Router) { }
+              private router:Router) {}
 
   ngAfterViewInit(): void {
-    console.log(this.tourWrap.nativeElement.querySelectorAll('.ticket-item'))
-    console.log(this.blockDirective)
 
     }
 
@@ -39,7 +37,6 @@ export class TicketListComponent implements OnInit, AfterViewInit {
           this.ticketsFiltered = [...data];
           this.ticketsCount=this.tickets.length;
           this.ticketsFilteredCount=this.ticketsCount;
-
       })
   }
 
@@ -68,6 +65,5 @@ export class TicketListComponent implements OnInit, AfterViewInit {
   directiveRenderComplete(ev: boolean) {
     this.blockDirective.initItems();
     this.blockDirective.setAttrStyleBorder(0);
-
   }
 }

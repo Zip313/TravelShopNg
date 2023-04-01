@@ -3,17 +3,22 @@
   <div class="search_block">
     <p>Всего туров {{ticketsCount}}</p>
     <p>Найдено туров {{ticketsFilteredCount}}</p>
+    <div>Текущий элемент: {{blockDirective.activeElementIndex}} </div>
     <input type="text" pInputText (input)="searchTickets($event)"  />
   </div>
-<!--  <div>Текущий элемент: {{blockDirective.activeElementIndex}} </div>-->
-<!--  #blockDirective = 'blocksStyle';-->
+
+
+
   <div appBlocksStyle
        #tourWrap
+       #blockDirective = 'blocksStyle'
+
        (renderComplete)="directiveRenderComplete($event)"
        class = "d-flex flex-wrap justify-content-around"
        [selector]="'.ticket-item'"
        [initFirst]="true"
   >
+
     <div class="ticket-item col-3 m-2"
          [id]="'ticket_'+i"
          (click)="goToTicketInfoPage(ticket)"

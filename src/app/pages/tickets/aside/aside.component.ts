@@ -20,7 +20,6 @@ export class AsideComponent implements OnInit {
   }
 
   changeType(ev: {ev: Event, value: IMenuType}): void {
-    console.log('ev', ev)
     this.updateMenuType.emit(ev.value);
   }
 

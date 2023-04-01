@@ -22,7 +22,6 @@ export class TicketItemComponent implements OnInit {
     if(paramValueId){
       const tickets = this.ticketStorage.getStorage();
       this.ticket = tickets.find((el)=>el.id === paramValueId);
-      console.log('this ticket', this.ticket);
     }
   }
 
