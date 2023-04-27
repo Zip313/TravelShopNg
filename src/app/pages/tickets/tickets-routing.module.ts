@@ -13,6 +13,10 @@ const routes: Routes = [
 
       },
       {
+        path: 'settings',
+        loadChildren: ()  => import('../settings/settings.module').then(m => m.SettingsModule)
+      },
+      {
         // path: 'ticket/:id',
         path: 'ticket',
         loadChildren:() => import('../ticket-info/ticket-info.module').then(m=>m.TicketInfoModule)

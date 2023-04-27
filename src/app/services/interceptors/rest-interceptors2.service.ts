@@ -6,13 +6,13 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class RestInterceptorsService implements HttpInterceptor {
+export class RestInterceptorsService2 implements HttpInterceptor {
 
   constructor(private userService: UserService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.userService.Token;
-    console.log(`interceptor1 request with token ${token} to ${req.urlWithParams}` );
+    console.log(`interceptor2 request with token ${token} to ${req.urlWithParams}` );
 
     if (token) {
       const cloned = req.clone({

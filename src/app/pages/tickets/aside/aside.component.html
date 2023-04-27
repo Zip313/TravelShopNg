@@ -1,8 +1,30 @@
 <div class="h-100 aside">
-  <p-dropdown [options]="menuTypes"
-              [(ngModel)]="selectedMenuType"
-              optionLabel="label"
-              (onChange)="changeType($event)">
+  <div class="m-3">
+    <p-dropdown [options]="menuTypes"
+                [(ngModel)]="selectedMenuType"
+                optionLabel="label"
+                (onChange)="changeType($event)">
 
-  </p-dropdown>
+    </p-dropdown>
+  </div>
+  <!--Добавлен новый список-->
+  <div class="m-3">
+    <p-dropdown
+                [options]="tourTypes"
+                optionLabel="label"
+                (onChange)="changeTourType($event)">
+    </p-dropdown>
+  </div>
+  <div class="m-3">
+    <p-calendar (onSelect)="selectDate($event)" ></p-calendar>
+  </div>
+
+  <div class="m-3">
+    <p-button (onClick)="initRestError()">Get Error By Subscribe</p-button>
+  </div>
+
+  <div class="m-3">
+    <p-button (click)="initSettingsData()">Обновить настройки</p-button>
+  </div>
+  <p-toast position="top-right"></p-toast>
 </div>

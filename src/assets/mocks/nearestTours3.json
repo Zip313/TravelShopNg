@@ -1,0 +1,10 @@
+{
+  "name":"Sunny tour",
+  "description":"From the south to the center of the country",
+  "tourOperator":"LocalAdventures",
+  "price":"€2,192",
+  "img":"pic3.jpg",
+  "type":"multi",
+  "date":"2022-10-22",
+  "locationId":"1af3-3a32-345b-f321"
+}

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {ExtraOptions, RouterModule, Routes} from '@angular/router';
 
 
 
@@ -12,19 +12,16 @@ const routes: Routes = [
     path: 'tickets',
     loadChildren: ()  => import('./pages/tickets/tickets.module').then(m => m.TicketsModule)
   },
-  {
-    path: 'settings',
-    loadChildren: ()  => import('./pages/settings/settings.module').then(m => m.SettingsModule)
-  },
+
 
   { path: '**',
    redirectTo: 'auth'
   }
 ];
 
-
+const options: ExtraOptions = {scrollPositionRestoration:"enabled"}
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, options)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

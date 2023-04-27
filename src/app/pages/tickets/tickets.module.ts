@@ -13,6 +13,11 @@ import { UserLogoComponent } from './header/user-logo/user-logo.component';
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {BlocksStyleDirective} from "../../directive/blocks-style.directive";
+import {CalendarModule} from "primeng/calendar";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import { TicketListItemComponent } from './ticket-list/ticket-list-item/ticket-list-item.component';
+import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
   declarations: [
@@ -22,7 +27,8 @@ import {BlocksStyleDirective} from "../../directive/blocks-style.directive";
     FooterComponent,
     TicketListComponent,
     UserLogoComponent,
-    BlocksStyleDirective
+    BlocksStyleDirective,
+    TicketListItemComponent
   ],
   imports: [
     CommonModule,
@@ -30,14 +36,18 @@ import {BlocksStyleDirective} from "../../directive/blocks-style.directive";
     MenubarModule,
     DropdownModule,
     FormsModule,
+    CalendarModule,
+    ToastModule,
+    InputTextModule
 
   ],
   providers:[
     TicketsService,
-
+    MessageService
   ],
-  exports:[
+    exports: [
+        TicketListItemComponent
 
-  ]
+    ]
 })
 export class TicketsModule { }

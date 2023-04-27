@@ -8,18 +8,22 @@ import {TabPanel, TabView, TabViewModule} from "primeng/tabview";
 import {FormsModule} from "@angular/forms";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
+import { StatisticComponent } from './settings/statistic/statistic.component';
+import {TableModule} from "primeng/table";
 
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    SettingsComponent,
+    StatisticComponent
   ],
   imports: [
     CommonModule,
     SettingsRoutingModule,
     TabViewModule,
     FormsModule,
-    ToastModule
+    ToastModule,
+    TableModule
 
   ],
   providers:[

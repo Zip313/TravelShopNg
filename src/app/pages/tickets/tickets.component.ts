@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Output, ViewChild} from '@angular/core';
 import {IMenuType} from "../../models/IMenuType";
 
 @Component({
@@ -6,13 +6,19 @@ import {IMenuType} from "../../models/IMenuType";
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss']
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent implements OnInit, AfterViewInit {
+
   @Output() public selectedType: IMenuType;
-  constructor() { }
+  @ViewChild('root') root: ElementRef;
+  constructor( ) { }
 
   ngOnInit(): void {
-  }
 
+
+
+  }
+  ngAfterViewInit(): void {
+  }
   public updateSelectedType(ev: IMenuType): void {
     this.selectedType = ev;
   }

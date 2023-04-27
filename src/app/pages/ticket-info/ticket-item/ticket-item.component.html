@@ -1,9 +1,109 @@
 <div class="ticket-info-wrap">
-  <div>
-    <a routerLink="/tickets/tickets-list">Назад</a>
-    <div class="mt-3">
-      {{ticket?.name}}
+<div class="container">
+  <div class="mt-4 ">
+<!--    <a routerLink="/tickets/tickets-list">Назад</a>-->
+    <div class="m-3  d-inline-block">
+<app-ticket-list-item [ticket]="ticket"></app-ticket-list-item>
     </div>
+  </div>
+  <div class="m-4">
+    <h4>Личная информация</h4>
+    <div class="m-3 user-info flex-column" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="m-3 d-flex flex-row justify-content-between align-items-center">
+<!--        <label class="mt-3">Имя</label>-->
+        <ng-container *ngTemplateOutlet="userFieldTitle; context:{titleValue:'Имя',for:'firstName'}"></ng-container>
+        <input type="text"
+               id="firstName"
+               class="mt-3"
+               pInputText
+               formControlName="firstName"
+        />
+      </div>
+      <div class="m-3 d-flex flex-row justify-content-between align-items-center">
+<!--        <label class="mt-3">Фамилия</label>-->
+        <ng-container *ngTemplateOutlet="userFieldTitle; context:{titleValue:'Фамилия',for:'lastName'}"></ng-container>
+        <input type="text"
+               id="lastName"
+               class="mt-3"
+               pInputText
+               formControlName="lastName"
+        />
+      </div>
+      <div class="m-3 d-flex flex-row justify-content-between align-items-center">
+<!--        <label class="mt-3">Номер карты</label>-->
+        <ng-container *ngTemplateOutlet="userFieldTitle; context:{titleValue:'Номер карты',for:'cardNumber'}"></ng-container>
+        <input type="text"
+               id="cardNumber"
+               class="mt-3"
+               pInputText
+               formControlName="cardNumber"
+        />
+      </div>
+      <div class="m-3 d-flex flex-row justify-content-between align-items-center">
+<!--        <label class="mt-3">Дата рождения</label>-->
+        <ng-container *ngTemplateOutlet="userFieldTitle; context:{titleValue:'Дата рождения'}"></ng-container>
+        <p-calendar
+               class="mt-3 overflow-visible"
+               formControlName="birthDay"
+               (onSelect)="onSelectDate($event)"
+        ></p-calendar>
+      </div>
+      <div class="m-3 d-flex flex-row justify-content-between align-items-center">
+<!--        <label class="mt-3">Возраст</label>-->
+        <ng-container *ngTemplateOutlet="userFieldTitle; context:{titleValue:'Возраст'}"></ng-container>
+        <p-inputNumber
+               [showButtons]="true"
+               class="mt-3"
+               formControlName="age"
+        ></p-inputNumber>
+      </div>
+      <div class="m-3 d-flex flex-row justify-content-between align-items-center">
+<!--        <label class="mt-3">Гражданство</label>-->
+        <ng-container *ngTemplateOutlet="userFieldTitle; context:{titleValue:'Гражданство',for:'citizen'}"></ng-container>
+        <input type="text"
+               id="citizen"
+               class="mt-3"
+               pInputText
+               formControlName="citizen"
+        />
+      </div>
+      <div class="m-3 d-flex flex-row justify-content-center align-items-center">
+        <p-button
+          class="p-0 m-0"
+          type="submit"
+          (click)="initTour()"
+            [disabled]="!userForm.valid"
+        >Перейти к оформлению</p-button>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mt-4 " >
+    <h4>Похожие туры</h4>
+    <div>
+      <input #ticketSearchInput [(ngModel)]="searchText" type="text" pInputText />
+    </div>
+
+
+    <p-carousel [value]="nearestTours" *ngIf="nearestTours">
+      <ng-template pTemplate="header">
+      </ng-template>
+      <ng-template let-tour pTemplate="item">
+        <h4>Tour: {{tour.name}}</h4>
+        <h6>Location: {{tour.location?.name}}</h6>
+
+        <div class="ticket-img-nearest">
+          <img class="w-100 h-100" src="/assets/img/{{tour.img}}"/>
+        </div>
+      </ng-template>
+    </p-carousel>
   </div>
 </div>
 
+</div>
+
+<ng-template #userFieldTitle let-value = "titleValue" let-for = "for">
+  <label class="mt-3" for="{{for}}">{{value}}</label>
+</ng-template>

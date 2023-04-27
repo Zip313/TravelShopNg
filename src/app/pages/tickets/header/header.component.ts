@@ -3,6 +3,7 @@ import {MenuItem} from "primeng/api";
 import {IUser} from "../../../models/IUser";
 import {UserService} from "../../../services/user/user.service";
 import {IMenuType} from "../../../models/IMenuType";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -12,14 +13,18 @@ import {IMenuType} from "../../../models/IMenuType";
 export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
   items: MenuItem[];
   time: Date;
+  user:IUser|null;
   @Input() menuType: IMenuType;
   private timerInterval: number;
 
   private settingsActive = false;
 
-  constructor(private userService:UserService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    // this.user = this.userService.getUser();
     this.items =
       [
       {
@@ -55,12 +60,15 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
       },
       {
         label: 'Настройки',
-        routerLink:['/settings'],
+        routerLink:['/tickets/settings'],
         visible: this.settingsActive
       },
       {
         label: 'Выйти',
-        routerLink:['/auth']
+        routerLink:['/auth'],
+        command:() => {
+          this.authService.logout();
+        }
       },
 
     ];

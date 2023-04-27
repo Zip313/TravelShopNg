@@ -4,6 +4,7 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {IUser} from "../../../models/IUser";
 import {MessageService} from "primeng/api";
 import {UserService} from "../../../services/user/user.service";
+import {ConfigService} from "../../../services/config/config.service";
 
 @Component({
   selector: 'app-authorization',
@@ -20,6 +21,7 @@ export class AuthorizationComponent implements OnInit,OnDestroy {
   isRememberMe:boolean;
   cardNumber:string;
   authTextButton:string;
+  useUserCard:boolean = false;
 
   constructor(public authService:AuthService,
               private messageService:MessageService,
@@ -28,6 +30,7 @@ export class AuthorizationComponent implements OnInit,OnDestroy {
               ) { }
 
   ngOnInit(): void {
+    this.useUserCard = ConfigService.config.useUserCard;
     this.authTextButton='Авторизоваться';
     if (!this.userService.getUser()){
       this.checkAuth();
@@ -52,8 +55,11 @@ export class AuthorizationComponent implements OnInit,OnDestroy {
 
 
     if(authUser) {
+      if (this.cardNumber) authUser.cardNumber=this.cardNumber;
+      console.log(authUser);
       this.userService.setUser(authUser);
-      this.authService.rememberUser();
+      this.userService.Token = `user_private_token_${authUser.login}`;
+      this.userService.rememberUser();
       this.messageService.add({
         severity: 'success',
         summary: `Авторизация успешна `,
@@ -78,6 +84,6 @@ export class AuthorizationComponent implements OnInit,OnDestroy {
 
   logout() {
     this.userService.setUser(null);
-    this.authService.removeUserFromStorage();
+    this.userService.removeUserFromStorage();
   }
 }

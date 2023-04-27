@@ -19,6 +19,13 @@
            [(ngModel)]="psw"/>
   </div>
   <div class="mt-3">
+    <p-checkbox
+                label="Запомнить меня"
+                [(ngModel)]="isRememberMe"
+                [binary]="true" >
+    </p-checkbox>
+  </div>
+  <div class="mt-3" *ngIf="useUserCard">
 <!--    <p-checkbox name="groupname" value="val1" [(ngModel)]="selectedValues"></p-checkbox>-->
     <p-checkbox (onChange)="vipStatusSelected($event)"
                 label="Есть номер карты"
@@ -26,11 +33,7 @@
                 [binary]="true" >
       CheckBox
     </p-checkbox>
-    <p-checkbox class="mx-4"
-                label="Запомнить меня"
-                [(ngModel)]="isRememberMe"
-                [binary]="true" >
-    </p-checkbox>
+
     <div *ngIf="selectedValue">
       <span class="mx-3">Номер карты</span>
       <input class="mt-3 "

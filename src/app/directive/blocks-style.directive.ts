@@ -88,6 +88,12 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges{
       }
     }
   }
+
+  updateItems(): void {
+
+    this.items = this.el.nativeElement.querySelectorAll(this.selector);
+    this.setAttrStyleBorder(0);
+  }
 }
 
 type RightLeft = 'ArrowRight'|'ArrowLeft';

@@ -64,16 +64,8 @@ export class AuthService {
     window.localStorage.setItem('users',JSON.stringify(users));
   }
 
-  removeUsersFromLocalStorage(): void {
-    window.localStorage.removeItem('users');
-  }
 
-  rememberUser() {
-    window.localStorage.setItem('user',JSON.stringify(this.userService.getUser()));
-  }
-  removeUserFromStorage() {
-    window.localStorage.removeItem('user');
-  }
+
 
   checkAuthInStorage(){
     const userJsonString = window.localStorage.getItem('user');
@@ -87,5 +79,11 @@ export class AuthService {
     if (usersJsonString) {
       this.usersStorage = JSON.parse(usersJsonString) ?? [];
     }
+  }
+
+  logout() {
+    this.userService.setUser(null);
+    this.userService.Token=null;
+    this.userService.removeUserFromStorage();
   }
 }

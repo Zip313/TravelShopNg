@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MessageService} from "primeng/api";
 import {IUser} from "../../../models/IUser";
 import {AuthService} from "../../../services/auth/auth.service";
+import {ConfigService} from "../../../services/config/config.service";
+import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'app-registration',
@@ -15,11 +17,15 @@ export class RegistrationComponent implements OnInit {
   email: string;
   cardNumber: string;
   isNeedSaveToLocalStorage: false;
+  showCardNumber: boolean;
 
   constructor(private messageService:MessageService,
-    private authService:AuthService) { }
+    private authService:AuthService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.showCardNumber = ConfigService.config.useUserCard;
   }
 
 
@@ -67,6 +73,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   removeUsersFromLocalStorage($event: MouseEvent) {
-    this.authService.removeUsersFromLocalStorage();
+    this.userService.removeUsersFromLocalStorage();
   }
 }

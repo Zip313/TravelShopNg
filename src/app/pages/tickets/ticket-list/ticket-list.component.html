@@ -1,15 +1,16 @@
 
-<div *ngIf="tickets">
+<div class="h-100 overflow-auto">
   <div class="search_block">
-    <p>Всего туров {{ticketsCount}}</p>
-    <p>Найдено туров {{ticketsFilteredCount}}</p>
-    <div>Текущий элемент: {{blockDirective.activeElementIndex}} </div>
-    <input type="text" pInputText (input)="searchTickets($event)"  />
+    <ng-container *ngIf="tickets">
+      <p>Всего туров {{ticketsCount}}</p>
+      <p>Найдено туров {{ticketsFilteredCount}}</p>
+      <div>Текущий элемент: {{blockDirective.activeElementIndex}} </div>
+    </ng-container>
+    <input #ticketSearchInput [(ngModel)]="searchText" type="text" pInputText   />
   </div>
-
-
-
-  <div appBlocksStyle
+<!--  (input)="handleSearchTickets($event)"-->
+  <div
+       appBlocksStyle
        #tourWrap
        #blockDirective = 'blocksStyle'
 
@@ -19,12 +20,11 @@
        [initFirst]="true"
   >
 
-    <div class="ticket-item col-3 m-2"
+    <div class="m-2"
          [id]="'ticket_'+i"
          (click)="goToTicketInfoPage(ticket)"
-         *ngFor="let ticket of ticketsFiltered; let i = index">
-      <img src="/assets/img/{{ticket.img}}"  />
-      <div class="ticket-title">{{ticket.name}}</div>
+         *ngFor="let ticket of ticketsCopy; let i = index">
+      <app-ticket-list-item [ticket]="ticket"></app-ticket-list-item>
     </div>
   </div>
 </div>

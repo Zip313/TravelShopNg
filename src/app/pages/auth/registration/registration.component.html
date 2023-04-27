@@ -33,13 +33,18 @@
            autocomplete="email"
            [(ngModel)]="email"/>
   </div>
-  <div >
+  <div *ngIf="showCardNumber; else noSelected ">
     <span class="mx-3">Номер карты</span>
     <input type="text"
            class="mt-3"
            pInputText
            [(ngModel)]="cardNumber"/>
   </div>
+
+
+  <ng-template #noSelected>
+    <p>Карта не выбрана</p>
+  </ng-template>
 
 
 
