@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {INearestTour, ITour, ITourLocation} from "../../../models/ITour";
 import {ActivatedRoute} from "@angular/router";
 import {IUser} from "../../../models/IUser";
@@ -6,6 +6,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../services/user/user.service";
 import {TicketsService} from "../../../services/tickets/tickets.service";
 import { debounceTime, forkJoin, fromEvent, map, Subscription} from "rxjs";
+import {PopupComponent} from "./popup/popup.component";
 
 @Component({
   selector: 'app-ticket-item',
@@ -21,6 +22,9 @@ export class TicketItemComponent implements OnInit,AfterViewInit,OnDestroy {
   toursLocation?: ITourLocation[];
   searchText: any;
   @ViewChild('ticketSearchInput') ticketSearchInput: ElementRef;
+  @ViewChild('popup') popup: PopupComponent;
+
+  @Output() onClick:EventEmitter<string> = new EventEmitter<string>();
 
   ticketRestSub: Subscription;
   searchTicketSub: Subscription;
@@ -80,6 +84,7 @@ export class TicketItemComponent implements OnInit,AfterViewInit,OnDestroy {
     this.searchTicketSub = fromEventObserver
       .subscribe(() => {
         this.initSearchNearerTour(this.searchText);
+        this.popup.onChange(this.searchText);
       })
 
     // setCardNumber
@@ -140,4 +145,12 @@ export class TicketItemComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
 
+  checkNearest(text: any) {
+    this.searchText = text;
+  }
+
+  search(txt: any) {
+    console.log('search: ', txt);
+    this.searchText=txt;
+  }
 }

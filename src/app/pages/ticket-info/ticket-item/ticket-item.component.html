@@ -84,6 +84,7 @@
     <h4>Похожие туры</h4>
     <div>
       <input #ticketSearchInput [(ngModel)]="searchText" type="text" pInputText />
+      <app-popup #popup (searchTerm)="search($event)"></app-popup>
     </div>
 
 
